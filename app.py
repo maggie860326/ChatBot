@@ -9,20 +9,39 @@ from fsm import TocMachine
 
 
 API_TOKEN = '545806002:AAHu7X4MaqyXGY5A-GhD4n4Gjdj6ShATEEs'
-WEBHOOK_URL = 'https://9abede3c.ngrok.io/hook'
+WEBHOOK_URL = 'https://9abede3c.ngrok.io/show-fsm'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
 
 machine = TocMachine(
     states=[
-        'S','intro','Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19','Q20','Q21','finish'
+        'S','hi','who','happy','intro','Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19','Q20','Q21','finish'
     ],
     transitions=[
         {
             'trigger': 'next',
-            'source': 'S',
-            'dest': 'intro'
+            'source': ['S','happy','who'],
+            'dest': 'hi',
+            'unless': 'I_am_sad'
+        },
+        {
+            'trigger': 'next',
+            'source': ['S','hi','who','happy','finish'],
+            'dest': 'intro',
+            'conditions': 'I_am_sad'
+        },
+        {
+            'trigger': 'next',
+            'source': 'hi',
+            'dest': 'happy',
+            'conditions': 'I_am_happy'
+        },
+        {
+            'trigger': 'next',
+            'source': 'hi',
+            'dest': 'who',
+            'unless': ['I_am_sad','I_am_happy']
         },
         {
             'trigger': 'next',
@@ -158,9 +177,15 @@ machine = TocMachine(
         },
         {
             'trigger': 'next',
-            'source': ['Q1','Q21','finish'],
-            'dest': 'intro',
-            'conditions': 'restart'
+            'source': ['intro','Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19','Q20','Q21'],
+            'dest': 'S',
+            'conditions': 'quit'
+        },
+        {
+            'trigger': 'next',
+            'source': 'finish',
+            'dest': 'hi',
+            'unless': 'I_am_sad'
         }
     ],
     initial='S',
