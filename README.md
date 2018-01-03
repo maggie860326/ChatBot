@@ -26,7 +26,7 @@ bot會簡單問候使用者
      
 
 2. /sad，回覆「別擔心，我們會幫助你的!」，再跳到 [intro state](#intro-state) 開始測驗
-![](https://i.imgur.com/sdW5l55.jpg)
+![](https://i.imgur.com/zagn5wl.jpg)
 
 3. /who_are_you 或任何其他字詞，跳到 [who state](#who-state) 讓bot自我介紹一下
 
