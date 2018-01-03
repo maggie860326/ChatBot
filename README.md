@@ -4,7 +4,7 @@
 
 ## 介紹chatbot
 
-[@Psychological_Test_bot](https://web.telegram.org/#/im?p=@Psychological_Test_bot) 是一款讓使用者進行心理測驗(認真)的bot
+[@Psychological_Test_bot](https://web.telegram.org/#/im?p=@Psychological_Test_bot) 是一款讓使用者進行心理測驗(認真)的bot。
 目前只有貝克憂鬱量表的測驗，以後可能會再添加其他測驗。
 /depression_test 有放在bot command裡面，可從輸入欄右側點選。
 
